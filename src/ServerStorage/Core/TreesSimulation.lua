@@ -1,10 +1,15 @@
 
+--[[
+	UUIDs are used to keep track of generations and the mutations that occur.
+]]
+
 local CONSTANTS = {
 	UPDATES_PER_REPRODUCE_CHECK = 100, -- number of growth steps to occur before seed chance is calculated.
 	COST_TO_REPRODUCE = 50, -- food cost
 }
 
 type GenomeDNA = {
+	uuid : string,
 	-- normalize these two below values to 1
 	rate_of_growth : number,
 	rate_of_preservation : number,
@@ -14,23 +19,33 @@ type GenomeDNA = {
 }
 
 type GenomeProperties = {
+	uuid : string, -- matches the GenomeDNA uuid
+
 	chance_of_seed_reproduction_per_leaf : number, -- = (1 - (rate_of_preservation * 0.05))
 	food_cost_per_branch : number, -- each branch requires an amount of food to survive, tree needs (TOTAL_BRANCHES * COST_PER_BRANCH) food to sustain the entire tree
 }
 
 type Seed = {
-	genome : GenomeDNA
+	uuid : string,
+
+	genome : GenomeDNA,
 }
 
 type Branch = {
+	uuid : string,
 
+	root : Branch?,
+	leaves : { Leaf },
 }
 
-type Leaves = {
+type Leaf = {
+	uuid : string,
 
 }
 
 type Tree = {
+	uuid : string,
+
 	genome : GenomeDNA,
 	genome_properties : GenomeProperties,
 	branches : { Branch },
