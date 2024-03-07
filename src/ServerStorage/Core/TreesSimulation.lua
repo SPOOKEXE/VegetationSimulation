@@ -53,6 +53,22 @@ type Tree = {
 	Reproduce : (Tree) -> Seed,
 }
 
+type HistoryItem = {
+	object : Seed | Branch | Leaf | Tree,
+	timestamp : number, -- time since simulation started
+}
+
+type HistoryCache = {
+	total_items : number, -- total history items
+	total_steps : number, -- simulation ticks parsed
+	total_deltatime : number, -- total time passed in the simulation
+	history : { HistoryItem }, -- history items
+}
+
+type Simulation = {
+
+}
+
 local SystemsContainer = {}
 
 --[[
@@ -76,52 +92,69 @@ local SystemsContainer = {}
 
 -- // Genome // --
 local Genome = {}
-Genome.__index = Genome
 
 function Genome.New()
-	return setmetatable({}, Genome)
+	return {}
 end
 
 -- // Seed // --
 local Seed = {}
-Seed.__index = Seed
 
 function Seed.New()
-	return setmetatable({}, Seed)
+	return {}
 end
 
 -- // Branch // --
 local Branch = {}
-Branch.__index = Branch
 
 function Branch.New()
-	return setmetatable({}, Branch)
+	return {}
 end
 
 -- // Leaves // --
 local Leaves = {}
-Leaves.__index = Leaves
 
 function Leaves.New()
-	return setmetatable({}, Leaves)
+	return {}
 end
 
 -- // Tree // --
 local Tree = {}
-Tree.__index = Tree
 
 function Tree.New()
-	return setmetatable({}, Tree)
+	return {}
+end
+
+function Tree.Update( tree )
+
+end
+
+-- // Simulation // --
+local Simulation = {}
+
+function Simulation.New()
+	return {}
+end
+
+function Simulation.GenerateRandomSeeds( sim : Simulation, total : number )
+
+end
+
+function Simulation.Update( sim : Simulation, dt : number )
+
 end
 
 -- // Module // --
 local Module = {}
 
-function Module.UpdateTrees()
+function Module.UpdateTrees( dt : number )
 
 end
 
 function Module.Start()
+
+	local DEFAULT_SIMULATION = Simulation.New()
+	Simulation:GenerateRandomSeeds(DEFAULT_SIMULATION)
 
 end
 
